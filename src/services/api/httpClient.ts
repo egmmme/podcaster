@@ -1,18 +1,18 @@
-import { API_CONSTANTS } from "@shared/constants/api";
+import { API_CONSTANTS } from '@shared/constants/api';
 
 export class HttpClient {
-    static async get<T>(url: string): Promise<T> {
-        const response = await fetch(url);
+  static async get<T>(url: string): Promise<T> {
+    const response = await fetch(url);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    static async getWithCors<T>(url: string): Promise<T> {
-        const corsUrl = `${API_CONSTANTS.CORS_PROXY}${encodeURIComponent(url)}`;
-        return this.get<T>(corsUrl);
-    }
+    return response.json();
+  }
+
+  static async getWithCors<T>(url: string): Promise<T> {
+    const corsUrl = `${API_CONSTANTS.CORS_PROXY}${encodeURIComponent(url)}`;
+    return this.get<T>(corsUrl);
+  }
 }
