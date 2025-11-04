@@ -1,10 +1,18 @@
 import React, { createContext, useContext, useReducer, ReactNode, useMemo } from 'react';
 import { Podcast, PodcastDetail, Episode } from '../../domain/entities';
 
+/**
+ * PodcastState
+ * Represents the state managed by the Podcast context.
+ */
 interface PodcastState {
+    /** All podcasts returned from the API or cache */
     podcasts: Podcast[];
+    /** Currently selected podcast detail (or null) */
     selectedPodcast: PodcastDetail | null;
+    /** Episodes for the selected podcast or last-loaded set */
     episodes: Episode[];
+    /** Current text filter applied to podcasts */
     filter: string;
 }
 
@@ -14,14 +22,20 @@ type PodcastAction =
     | { type: 'SET_EPISODES'; payload: Episode[] }
     | { type: 'SET_FILTER'; payload: string };
 
-const initialState: PodcastState = {
+/** Public initial state (exported for tests) */
+export const initialState: PodcastState = {
     podcasts: [],
     selectedPodcast: null,
     episodes: [],
     filter: '',
 };
 
-const podcastReducer = (state: PodcastState, action: PodcastAction): PodcastState => {
+/**
+ * podcastReducer
+ * Reducer handling PodcastAction to produce a new PodcastState.
+ * Exported for unit testing.
+ */
+export const podcastReducer = (state: PodcastState, action: PodcastAction): PodcastState => {
     switch (action.type) {
         case 'SET_PODCASTS':
             return { ...state, podcasts: action.payload };
@@ -46,6 +60,15 @@ interface PodcastContextType extends PodcastState {
 
 const PodcastContext = createContext<PodcastContextType | undefined>(undefined);
 
+/**
+ * PodcastProvider
+ * Wrap this around your app (or subtree) to provide podcast-related state.
+ *
+ * Example:
+ * <PodcastProvider>
+ *   <App />
+ * </PodcastProvider>
+ */
 export const PodcastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(podcastReducer, initialState);
 
@@ -88,6 +111,10 @@ export const PodcastProvider: React.FC<{ children: ReactNode }> = ({ children })
     );
 };
 
+/**
+ * usePodcast
+ * Custom hook that returns the podcast context value. Throws if used outside a PodcastProvider.
+ */
 export const usePodcast = (): PodcastContextType => {
     const context = useContext(PodcastContext);
     if (context === undefined) {
