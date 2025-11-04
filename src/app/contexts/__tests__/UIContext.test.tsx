@@ -31,7 +31,7 @@ describe('UIContext', () => {
         };
 
         // suppress React error logging for this assertion so test output remains clean
-        const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const spy = jest.spyOn(console, 'error').mockImplementation(() => { });
         render(
             <TestBoundary>
                 <Bad />

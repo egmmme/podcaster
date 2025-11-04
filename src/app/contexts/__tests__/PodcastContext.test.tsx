@@ -30,7 +30,7 @@ describe('PodcastContext', () => {
             return null;
         };
 
-        const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const spy = jest.spyOn(console, 'error').mockImplementation(() => { });
         render(
             <TestBoundary>
                 <Bad />

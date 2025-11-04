@@ -6,7 +6,7 @@ import { PodcastCard } from '../../components/ui/PodcastCard/PodcastCard';
 import { LoadingSpinner } from '../../components/ui/LoadingSpinner/LoadingSpinner';
 import './HomePage.css';
 
-export const HomePage: React.FC = () => {
+const HomePage: React.FC = () => {
     const navigate = useNavigate();
     const { podcasts, loadingState, error } = usePodcasts();
     const { filteredPodcasts, setPodcasts } = usePodcast();
@@ -63,3 +63,5 @@ export const HomePage: React.FC = () => {
         </div>
     );
 };
+
+export default HomePage;
