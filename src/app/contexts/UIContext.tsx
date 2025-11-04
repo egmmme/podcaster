@@ -62,11 +62,6 @@ const UIContext = createContext<UIContextType | undefined>(undefined);
  * UIProvider
  * Wrap this around your app (or subtree) to provide UI state.
  *
- * Usage:
- * <UIProvider>
- *   <App />
- * </UIProvider>
- *
  * Props:
  * - children: ReactNode - the subtree that will receive the context
  */

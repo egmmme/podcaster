@@ -63,11 +63,9 @@ const PodcastContext = createContext<PodcastContextType | undefined>(undefined);
 /**
  * PodcastProvider
  * Wrap this around your app (or subtree) to provide podcast-related state.
- *
- * Example:
- * <PodcastProvider>
- *   <App />
- * </PodcastProvider>
+ * 
+ * Props:
+ * - children: ReactNode - the subtree that will receive the context
  */
 export const PodcastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(podcastReducer, initialState);
