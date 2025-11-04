@@ -4,42 +4,47 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import './Header.css';
 
 interface HeaderProps {
-    onSearchChange: (value: string) => void;
-    searchValue: string;
+  onSearchChange: (value: string) => void;
+  searchValue: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onSearchChange, searchValue }) => {
-    const { isLoading } = useUI();
+export const Header: React.FC<HeaderProps> = ({
+  onSearchChange,
+  searchValue,
+}) => {
+  const { isLoading } = useUI();
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onSearchChange(event.target.value);
-    };
+  const handleSearchChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    onSearchChange(event.target.value);
+  };
 
-    return (
-        <header className="header">
-            <div className="header__content">
-                <h1 className="header__title">
-                    <a href="/" className="header__link">
-                        Podcaster
-                    </a>
-                </h1>
+  return (
+    <header className="header">
+      <div className="header__content">
+        <h1 className="header__title">
+          <a href="/" className="header__link">
+            Podcaster
+          </a>
+        </h1>
 
-                <div className="header__controls">
-                    <input
-                        type="text"
-                        placeholder="Filter podcasts..."
-                        value={searchValue}
-                        onChange={handleSearchChange}
-                        className="header__search"
-                    />
+        <div className="header__controls">
+          <input
+            type="text"
+            placeholder="Filter podcasts..."
+            value={searchValue}
+            onChange={handleSearchChange}
+            className="header__search"
+          />
 
-                    {isLoading && (
-                        <div className="header__loading">
-                            <LoadingSpinner size="small" />
-                        </div>
-                    )}
-                </div>
+          {isLoading && (
+            <div className="header__loading">
+              <LoadingSpinner size="small" />
             </div>
-        </header>
-    );
+          )}
+        </div>
+      </div>
+    </header>
+  );
 };

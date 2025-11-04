@@ -1,49 +1,50 @@
 .podcast-card {
-    background: var(--color-white);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: var(--spacing-lg);
-    text-align: center;
-    cursor: pointer;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+  border: 1px solid var(--color-border);
 }
 
 .podcast-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .podcast-card__image-container {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    overflow: hidden;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
 }
 
 .podcast-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--border-radius-md);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
 }
 
 .podcast-card__content {
-    text-align: center;
+  text-align: center;
 }
 
 .podcast-card__title {
-    margin: 0 0 var(--spacing-xs);
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    color: var(--color-text);
-    line-height: 1.3;
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
 }
 
 .podcast-card__author {
-    margin: 0;
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    line-height: 1.4;
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  line-height: 1.4;
 }

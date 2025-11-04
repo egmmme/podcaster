@@ -3,7 +3,7 @@ import { UIProvider } from './UIContext';
 import { PodcastProvider } from './PodcastContext';
 
 interface AppProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 /**
@@ -17,11 +17,9 @@ interface AppProviderProps {
  * - children: ReactNode - the subtree that will receive the contexts
  */
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-    return (
-        <UIProvider>
-            <PodcastProvider>
-                {children}
-            </PodcastProvider>
-        </UIProvider>
-    );
+  return (
+    <UIProvider>
+      <PodcastProvider>{children}</PodcastProvider>
+    </UIProvider>
+  );
 };
