@@ -1,0 +1,25 @@
+# Node dependencies
+node_modules/
+
+# Build output (webpack, scripts, etc.)
+dist/
+build/
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*.local
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
