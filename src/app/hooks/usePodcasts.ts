@@ -1,0 +1,97 @@
+import { useState, useEffect } from 'react';
+import { Podcast, PodcastDetail, Episode } from '../../domain/entities';
+import { PodcastApiService } from '../../services/api/podcastApi';
+import { CacheService } from '../../services/cache/cacheService';
+import { LoadingState } from '../../domain/types/common';
+
+export const usePodcasts = () => {
+    const [podcasts, setPodcasts] = useState<Podcast[]>([]);
+    const [loadingState, setLoadingState] = useState<LoadingState>('idle');
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchPodcasts = async (forceRefresh = false) => {
+        try {
+            setLoadingState('loading');
+            setError(null);
+
+            if (!forceRefresh && !CacheService.shouldFetchPodcasts()) {
+                const cached = CacheService.getPodcasts();
+                if (cached) {
+                    setPodcasts(cached.data as Podcast[]);
+                    setLoadingState('succeeded');
+                    return;
+                }
+            }
+
+            const podcastData = await PodcastApiService.getTopPodcasts();
+            setPodcasts(podcastData);
+            CacheService.setPodcasts(podcastData);
+            setLoadingState('succeeded');
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Failed to fetch podcasts';
+            setError(message);
+            setLoadingState('failed');
+        }
+    };
+
+    useEffect(() => {
+        fetchPodcasts();
+    }, []);
+
+    return {
+        podcasts,
+        loadingState,
+        error,
+        refetch: () => fetchPodcasts(true),
+    };
+};
+
+export const usePodcastDetail = (podcastId: string) => {
+    const [podcast, setPodcast] = useState<PodcastDetail | null>(null);
+    const [episodes, setEpisodes] = useState<Episode[]>([]);
+    const [loadingState, setLoadingState] = useState<LoadingState>('idle');
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchPodcastDetail = async (forceRefresh = false) => {
+        if (!podcastId) return;
+
+        try {
+            setLoadingState('loading');
+            setError(null);
+
+            if (!forceRefresh && !CacheService.shouldFetchEpisodes(podcastId)) {
+                const cached = CacheService.getEpisodes(podcastId);
+                if (cached) {
+                    setPodcast((cached as any).podcast);
+                    setEpisodes((cached as any).episodes);
+                    setLoadingState('succeeded');
+                    return;
+                }
+            }
+
+            const { podcast: podcastData, episodes: episodesData } =
+                await PodcastApiService.getPodcastDetail(podcastId);
+
+            setPodcast(podcastData);
+            setEpisodes(episodesData);
+            CacheService.setEpisodes(podcastId, { podcast: podcastData, episodes: episodesData });
+            setLoadingState('succeeded');
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Failed to fetch podcast details';
+            setError(message);
+            setLoadingState('failed');
+        }
+    };
+
+    useEffect(() => {
+        fetchPodcastDetail();
+    }, [podcastId]);
+
+    return {
+        podcast,
+        episodes,
+        loadingState,
+        error,
+        refetch: () => fetchPodcastDetail(true),
+    };
+};
