@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Podcast, PodcastDetail, Episode } from '../../domain/entities';
 import { PodcastApiService } from '../../services/api/podcastApi';
 import { CacheService } from '../../services/cache/cacheService';
@@ -9,7 +9,7 @@ export const usePodcasts = () => {
     const [loadingState, setLoadingState] = useState<LoadingState>('idle');
     const [error, setError] = useState<string | null>(null);
 
-    const fetchPodcasts = async (forceRefresh = false) => {
+    const fetchPodcasts = useCallback(async (forceRefresh = false) => {
         try {
             setLoadingState('loading');
             setError(null);
@@ -32,11 +32,11 @@ export const usePodcasts = () => {
             setError(message);
             setLoadingState('failed');
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchPodcasts();
-    }, []);
+    }, [fetchPodcasts]);
 
     return {
         podcasts,
@@ -52,7 +52,7 @@ export const usePodcastDetail = (podcastId: string) => {
     const [loadingState, setLoadingState] = useState<LoadingState>('idle');
     const [error, setError] = useState<string | null>(null);
 
-    const fetchPodcastDetail = async (forceRefresh = false) => {
+    const fetchPodcastDetail = useCallback(async (forceRefresh = false) => {
         if (!podcastId) return;
 
         try {
@@ -81,11 +81,11 @@ export const usePodcastDetail = (podcastId: string) => {
             setError(message);
             setLoadingState('failed');
         }
-    };
+    }, [podcastId]);
 
     useEffect(() => {
         fetchPodcastDetail();
-    }, [podcastId]);
+    }, [fetchPodcastDetail]);
 
     return {
         podcast,
