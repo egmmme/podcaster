@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUI } from '../../../../app/contexts/UIContext';
+import { useUI } from '@app/contexts/UIContext';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import './Header.css';
 

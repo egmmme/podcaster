@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default (env, argv) => {
     const isProduction = argv.mode === 'production';
     const isAnalyze = Boolean(process.env.ANALYZE);

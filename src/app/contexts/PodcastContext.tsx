@@ -5,7 +5,7 @@ import React, {
   ReactNode,
   useMemo,
 } from 'react';
-import { Podcast, PodcastDetail, Episode } from '../../domain/entities';
+import { Podcast, PodcastDetail, Episode } from '@domain/entities';
 
 /**
  * PodcastState

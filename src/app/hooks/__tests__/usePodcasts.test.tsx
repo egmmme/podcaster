@@ -1,11 +1,11 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { usePodcastDetail } from '../usePodcasts';
-import { PodcastApiService } from '../../../services/api/podcastApi';
-import { CacheService } from '../../../services/cache/cacheService';
+import { PodcastApiService } from '@services/api/podcastApi';
+import { CacheService } from '@services/cache/cacheService';
 
 // Mock the external dependencies
-jest.mock('../../../services/api/podcastApi');
-jest.mock('../../../services/cache/cacheService');
+jest.mock('@services/api/podcastApi');
+jest.mock('@services/cache/cacheService');
 
 const mockGetPodcastDetail =
   PodcastApiService.getPodcastDetail as jest.MockedFunction<

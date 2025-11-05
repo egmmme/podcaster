@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Episode } from '../../../../domain/entities';
+import { Episode } from '@domain/entities';
 import './EpisodeList.css';
 
 interface EpisodeListProps {

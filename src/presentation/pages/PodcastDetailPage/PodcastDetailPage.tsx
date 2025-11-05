@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { usePodcastDetail } from '../../../app/hooks/usePodcasts';
+import { usePodcastDetail } from '@app/hooks/usePodcasts';
 import Sidebar from '../../layouts/Sidebar/Sidebar';
 import EpisodeList from '../../components/ui/EpisodeList/EpisodeList';
 import LoadingSpinner from '../../components/ui/LoadingSpinner/LoadingSpinner';

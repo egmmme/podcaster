@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { PodcastDetailPage } from '../PodcastDetailPage';
-import { usePodcastDetail } from '../../../../app/hooks/usePodcasts';
+import { usePodcastDetail } from '@app/hooks/usePodcasts';
 
 // Mock the hook
-jest.mock('../../../../app/hooks/usePodcasts');
+jest.mock('@app/hooks/usePodcasts');
 
 const mockUsePodcastDetail = usePodcastDetail as jest.MockedFunction<
   typeof usePodcastDetail

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Podcast } from '../../../domain/entities';
+import { Podcast } from '@domain/entities';
 import './Sidebar.css';
 
 interface SidebarProps {
@@ -8,10 +8,7 @@ interface SidebarProps {
   className?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
-  podcast,
-  className = '',
-}) => {
+const Sidebar: React.FC<SidebarProps> = ({ podcast, className = '' }) => {
   return (
     <aside className={`sidebar ${className}`}>
       <div className="sidebar__content">
