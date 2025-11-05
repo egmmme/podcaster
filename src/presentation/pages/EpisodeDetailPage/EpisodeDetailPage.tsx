@@ -8,6 +8,10 @@ import LoadingSpinner from '../../components/ui/LoadingSpinner/LoadingSpinner';
 import SafeHTMLRenderer from '../../components/ui/SafeHTMLRenderer/SafeHTMLRenderer';
 import './EpisodeDetailPage.css';
 
+/**
+ * Page for a single episode with description and audio player.
+ * Uses podcastId and episodeId from route params.
+ */
 export const EpisodeDetailPage: React.FC = () => {
   const { podcastId, episodeId } = useParams<{
     podcastId: string;

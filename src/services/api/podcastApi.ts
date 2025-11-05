@@ -6,7 +6,14 @@ import {
 import { Podcast, PodcastDetail, Episode } from '@domain/entities';
 import { API_CONSTANTS } from '@shared/constants/api';
 
+/**
+ * Service for fetching podcast data from iTunes API via CORS proxy.
+ */
 export class PodcastApiService {
+  /**
+   * Fetches the top 100 podcasts from iTunes.
+   * @returns Promise with array of podcasts
+   */
   static async getTopPodcasts(): Promise<Podcast[]> {
     // CORREGIDO: Usar la URL directa sin duplicar el proxy
     const data = await HttpClient.getWithCors<iTunesPodcastResponse>(
@@ -22,12 +29,16 @@ export class PodcastApiService {
     }));
   }
 
+  /**
+   * Fetches podcast details and up to 20 most recent episodes.
+   * @param podcastId - The iTunes podcast identifier
+   * @returns Promise with podcast details and episodes array
+   */
   static async getPodcastDetail(
     podcastId: string
   ): Promise<{ podcast: PodcastDetail; episodes: Episode[] }> {
     const url = `${API_CONSTANTS.PODCAST_LOOKUP_URL}?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
-
-    // CORREGIDO: Usar la URL directa sin duplicar el proxy
+    
     const data = await HttpClient.getWithCors<iTunesPodcastLookupResponse>(url);
 
     const podcastResult = data.results.find(
@@ -68,6 +79,11 @@ export class PodcastApiService {
     return { podcast, episodes };
   }
 
+  /**
+   * Converts milliseconds to MM:SS format.
+   * @param milliseconds - Duration in milliseconds
+   * @returns Formatted duration string or "--:--" if invalid
+   */
   private static formatDuration(milliseconds: number): string {
     if (!milliseconds) return '--:--';
 

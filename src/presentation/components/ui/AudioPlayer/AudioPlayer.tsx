@@ -1,12 +1,21 @@
 import React from 'react';
 import './AudioPlayer.css';
 
+/**
+ * Props for the AudioPlayer component.
+ */
 interface AudioPlayerProps {
+  /** Source URL for the audio file */
   audioUrl: string;
+  /** Display title for the audio track */
   title: string;
+  /** Optional CSS class name */
   className?: string;
 }
 
+/**
+ * Accessible HTML5 audio player with a title and controls.
+ */
 export const AudioPlayer: React.FC<AudioPlayerProps> = ({
   audioUrl,
   title,

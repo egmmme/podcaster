@@ -4,6 +4,10 @@ import { PodcastApiService } from '@services/api/podcastApi';
 import { CacheService } from '@services/cache/cacheService';
 import { LoadingState } from '@domain/types/common';
 
+/**
+ * Fetches and manages top podcasts list with 24-hour caching.
+ * @returns Object with podcasts array, loading state, error, and refetch function
+ */
 export const usePodcasts = (): {
   podcasts: Podcast[];
   loadingState: LoadingState;
@@ -55,6 +59,11 @@ export const usePodcasts = (): {
   };
 };
 
+/**
+ * Fetches podcast details and episodes with per-podcast 24-hour caching.
+ * @param podcastId - The iTunes podcast identifier
+ * @returns Object with podcast details, episodes, loading state, error, and refetch function
+ */
 export const usePodcastDetail = (
   podcastId: string
 ): {

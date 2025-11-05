@@ -3,12 +3,21 @@ import { Link } from 'react-router-dom';
 import { Episode } from '@domain/entities';
 import './EpisodeList.css';
 
+/**
+ * Props for the EpisodeList component.
+ */
 interface EpisodeListProps {
+  /** Episodes to display */
   episodes: Episode[];
+  /** Parent podcast ID for building episode links */
   podcastId: string;
+  /** Optional CSS class name */
   className?: string;
 }
 
+/**
+ * Table listing of podcast episodes with links to episode detail routes.
+ */
 const EpisodeList: React.FC<EpisodeListProps> = ({
   episodes,
   podcastId,

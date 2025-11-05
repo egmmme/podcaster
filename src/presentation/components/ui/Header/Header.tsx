@@ -3,11 +3,19 @@ import { useUI } from '@app/contexts/UIContext';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import './Header.css';
 
+/**
+ * Props for the Header component.
+ */
 interface HeaderProps {
+  /** Callback when the search input value changes */
   onSearchChange: (value: string) => void;
+  /** Current search input value */
   searchValue: string;
 }
 
+/**
+ * App header with title, search input, and a loading indicator from UI context.
+ */
 export const Header: React.FC<HeaderProps> = ({
   onSearchChange,
   searchValue,
