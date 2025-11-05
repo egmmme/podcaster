@@ -24,6 +24,7 @@
     "validate": "npm run type-check && npm run lint:all && npm run test"
   },
   "dependencies": {
+    "dompurify": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0"
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
+    "@types/dompurify": "^3.0.5",
     "@types/jest": "^29.2.5",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",

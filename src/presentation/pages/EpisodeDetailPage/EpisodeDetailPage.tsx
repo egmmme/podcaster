@@ -5,6 +5,7 @@ import Sidebar from '../../layouts/Sidebar/Sidebar';
 import { AudioPlayer } from '../../components/ui/AudioPlayer/AudioPlayer';
 import { ContentSection } from '../../components/ui/ContentSection/ContentSection';
 import LoadingSpinner from '../../components/ui/LoadingSpinner/LoadingSpinner';
+import SafeHTMLRenderer from '../../components/ui/SafeHTMLRenderer/SafeHTMLRenderer';
 import './EpisodeDetailPage.css';
 
 export const EpisodeDetailPage: React.FC = () => {
@@ -61,9 +62,9 @@ export const EpisodeDetailPage: React.FC = () => {
             </h2>
 
             {episode.description && (
-              <div
+              <SafeHTMLRenderer
+                html={episode.description}
                 className="episode-detail-page__description"
-                dangerouslySetInnerHTML={{ __html: episode.description }}
               />
             )}
 
