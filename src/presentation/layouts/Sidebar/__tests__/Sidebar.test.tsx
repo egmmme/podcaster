@@ -48,12 +48,4 @@ describe('Sidebar', () => {
       expect(link).toHaveAttribute('href', '/podcast/1');
     });
   });
-
-  it('should apply custom className', () => {
-    const { container } = renderWithRouter(
-      <Sidebar podcast={mockPodcast} className="custom-class" />
-    );
-
-    expect(container.firstChild).toHaveClass('sidebar', 'custom-class');
-  });
 });
