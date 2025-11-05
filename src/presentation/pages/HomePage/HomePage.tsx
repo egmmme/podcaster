@@ -6,6 +6,9 @@ import { PodcastCard } from '../../components/ui/PodcastCard/PodcastCard';
 import LoadingSpinner from '../../components/ui/LoadingSpinner/LoadingSpinner';
 import './HomePage.css';
 
+/**
+ * Home page listing top podcasts with search filtering. Navigates to a podcast on card click.
+ */
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { podcasts, loadingState, error } = usePodcasts();

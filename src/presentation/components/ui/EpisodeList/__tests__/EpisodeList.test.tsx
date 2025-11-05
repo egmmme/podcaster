@@ -22,7 +22,9 @@ const mockEpisodes = [
   },
 ];
 
-const renderWithRouter = (component: React.ReactElement): ReturnType<typeof render> => {
+const renderWithRouter = (
+  component: React.ReactElement
+): ReturnType<typeof render> => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
 };
 

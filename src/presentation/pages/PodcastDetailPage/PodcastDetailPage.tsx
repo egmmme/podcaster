@@ -6,6 +6,10 @@ import EpisodeList from '../../components/ui/EpisodeList/EpisodeList';
 import LoadingSpinner from '../../components/ui/LoadingSpinner/LoadingSpinner';
 import './PodcastDetailPage.css';
 
+/**
+ * Page showing a podcast's sidebar and its list of episodes.
+ * Reads the podcastId from route params.
+ */
 export const PodcastDetailPage: React.FC = () => {
   const { podcastId } = useParams<{ podcastId: string }>();
 

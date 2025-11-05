@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import { Podcast } from '@domain/entities';
 import './Sidebar.css';
 
+/**
+ * Props for the Sidebar component.
+ */
 interface SidebarProps {
+  /** Podcast to display in the sidebar */
   podcast: Podcast;
+  /** Optional extra class names */
   className?: string;
 }
 
+/**
+ * Sidebar displaying podcast artwork, title, author, and summary with links to the podcast page.
+ */
 const Sidebar: React.FC<SidebarProps> = ({ podcast, className = '' }) => {
   return (
     <aside className={`sidebar ${className}`}>

@@ -2,11 +2,19 @@ import React from 'react';
 import { Podcast } from '@domain/entities';
 import './PodcastCard.css';
 
+/**
+ * Props for PodcastCard.
+ */
 interface PodcastCardProps {
+  /** Podcast summary data to display */
   podcast: Podcast;
+  /** Click handler invoked with the podcast id */
   onClick: (podcastId: string) => void;
 }
 
+/**
+ * Compact card showing podcast artwork, title and author.
+ */
 export const PodcastCard: React.FC<PodcastCardProps> = ({
   podcast,
   onClick,

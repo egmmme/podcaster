@@ -1,11 +1,21 @@
 import React from 'react';
-import DOMPurify from 'dompurify'; 
+import DOMPurify from 'dompurify';
 
+/**
+ * Props for SafeHTMLRenderer component.
+ */
 interface SafeHTMLRendererProps {
+  /** Raw HTML string to sanitize and render */
   html: string;
+  /** Optional CSS class name */
   className?: string;
 }
 
+/**
+ * Renders sanitized HTML content using DOMPurify to prevent XSS attacks.
+ * Allows only safe tags (p, strong, em, ul, ol, li, a) and secure URLs (https, http, mailto).
+ * Automatically adds target="_blank" and rel="noopener noreferrer" to all links.
+ */
 export const SafeHTMLRenderer: React.FC<SafeHTMLRendererProps> = ({
   html,
   className = '',
