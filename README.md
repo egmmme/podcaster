@@ -87,7 +87,9 @@ All components adapt seamlessly using CSS Grid, Flexbox, and strategic breakpoin
 * Native HTML5 audio player
 * Safe content rendering with DOMPurify
 * Responsive audio controls
-
+## Quality gates
+* TS Type-check
+* Lint for TS + CSS with eslint, stylelint
 ## 🧪 Testing Strategy
 ### Coverage Goals
 * Unit Tests: Components and utilities
