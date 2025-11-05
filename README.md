@@ -40,7 +40,6 @@ React 18 + TypeScript • React Router v6 • Context + useReducer • Webpack 5
 - [Performance](./docs/performance.md)
 - [Security](./docs/security.md)
 - [Available Scripts](./docs/scripts.md)
-- [Contributing](./docs/contributing.md)
 
 ## ✅ Quality
 
@@ -54,6 +53,4 @@ npm run validate
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
-
-See the full guide: [docs/contributing.md](./docs/contributing.md)
+## 🤝 [Contributing](./docs/contributing.md)
