@@ -1,29 +1,21 @@
 ## UI/UX Features
 
-### Responsive Design
+### Responsive
 
-The application implements a desktop-first responsive approach:
+- Desktop (≥1024px): sidebar + content
+- Tablet (768–1023px): compact sidebar
+- Mobile (<768px): single column, touch-friendly
 
-- **Desktop (1024px+)**: Full sidebar + content layout with optimal spacing
-- **Tablet (768px-1023px)**: Compact sidebar, optimized content width
-- **Mobile (<768px)**: Single column layout, touch-friendly interface, stacked components
-
-All components adapt seamlessly using CSS Grid, Flexbox, and strategic breakpoints.
-
-For detailed responsive design guidelines, see [Responsive Design Guide](./responsive-design-guide.md).
+Details: see [Responsive Design Guide](./responsive-design-guide.md).
 
 ### Design System
 
-- **CSS Variables**: Consistent theming through design tokens in `variables.css`
-- **Custom Components**: All UI built from scratch (no external UI libraries)
-- **Accessible Player**: Native HTML5 audio controls for maximum accessibility
-- **Loading States**: Spinners and feedback during data fetching
-- **Error Handling**: User-friendly error messages throughout the application
+- CSS variables as design tokens (`src/shared/styles/variables.css`)
+- Custom components (no external UI library)
+- Native HTML5 audio for accessibility
 
-### User Experience
+### Experience
 
-- **Instant Feedback**: Loading indicators for all async operations
-- **Smart Caching**: Data persisted locally to minimize API calls
-- **Smooth Navigation**: Client-side routing with React Router for instant page transitions
-- **Empty States**: Helpful messages when no content matches filters
-- **Persistent Search**: Filter state maintained across navigation
+- Clear loading and error states
+- Smooth navigation via React Router
+- Persistent search/filter across navigation
