@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../components/ui/Header/Header';
-import { usePodcast } from '../../app/contexts/PodcastContext';
+import { usePodcast } from '@app/contexts/PodcastContext';
 import './AppLayout.css';
 
 interface AppLayoutProps {

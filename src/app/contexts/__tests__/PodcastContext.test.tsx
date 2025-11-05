@@ -6,7 +6,7 @@ import {
   podcastReducer,
   initialState,
 } from '../PodcastContext';
-import { Podcast, PodcastDetail, Episode } from '../../../domain/entities';
+import { Podcast, PodcastDetail, Episode } from '@domain/entities';
 
 describe('PodcastContext', () => {
   test('usePodcast thrown render is caught by an ErrorBoundary (no noisy console output)', () => {

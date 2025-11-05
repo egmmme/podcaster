@@ -2,9 +2,9 @@ import { HttpClient } from './httpClient';
 import {
   iTunesPodcastResponse,
   iTunesPodcastLookupResponse,
-} from '../../domain/types/api';
-import { Podcast, PodcastDetail, Episode } from '../../domain/entities';
-import { API_CONSTANTS } from '../../shared/constants/api';
+} from '@domain/types/api';
+import { Podcast, PodcastDetail, Episode } from '@domain/entities';
+import { API_CONSTANTS } from '@shared/constants/api';
 
 export class PodcastApiService {
   static async getTopPodcasts(): Promise<Podcast[]> {

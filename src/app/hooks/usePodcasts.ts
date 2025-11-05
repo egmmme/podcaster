@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Podcast, PodcastDetail, Episode } from '../../domain/entities';
-import { PodcastApiService } from '../../services/api/podcastApi';
-import { CacheService } from '../../services/cache/cacheService';
-import { LoadingState } from '../../domain/types/common';
+import { Podcast, PodcastDetail, Episode } from '@domain/entities';
+import { PodcastApiService } from '@services/api/podcastApi';
+import { CacheService } from '@services/cache/cacheService';
+import { LoadingState } from '@domain/types/common';
 
 export const usePodcasts = (): {
   podcasts: Podcast[];

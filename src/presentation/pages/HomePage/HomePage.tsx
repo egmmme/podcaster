@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { usePodcasts } from '../../../app/hooks/usePodcasts';
-import { usePodcast } from '../../../app/contexts/PodcastContext';
+import { usePodcasts } from '@app/hooks/usePodcasts';
+import { usePodcast } from '@app/contexts/PodcastContext';
 import { PodcastCard } from '../../components/ui/PodcastCard/PodcastCard';
 import LoadingSpinner from '../../components/ui/LoadingSpinner/LoadingSpinner';
 import './HomePage.css';

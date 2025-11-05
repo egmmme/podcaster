@@ -1,5 +1,5 @@
 import React from 'react';
-import { Podcast } from '../../../../domain/entities';
+import { Podcast } from '@domain/entities';
 import './PodcastCard.css';
 
 interface PodcastCardProps {

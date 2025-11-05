@@ -1,5 +1,5 @@
 import { StorageService } from './storage';
-import { API_CONSTANTS, STORAGE_KEYS } from '../../shared/constants/api';
+import { API_CONSTANTS, STORAGE_KEYS } from '@shared/constants/api';
 
 export class CacheService {
   static getPodcasts(): { data: unknown; lastUpdated: number } | null {
