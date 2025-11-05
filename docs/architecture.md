@@ -1,15 +1,5 @@
 # Architecture
 
-## Tech Stack
-
-- **Frontend**: React 18, TypeScript 4.9
-- **Routing**: React Router DOM v6
-- **State Management**: Context API + useReducer
-- **Build Tool**: Webpack 5 (custom configuration)
-- **Styling**: CSS3 with CSS Variables
-- **Testing**: Jest 29 + React Testing Library
-- **Security**: DOMPurify for HTML sanitization
-
 ## Project Structure
 
 ```
@@ -33,12 +23,6 @@ src/
 ```
 
 ## Key Design Decisions
-
-### SPA over SSR
-
-- **Choice**: Client-side Single Page Application
-- **Reason**: Explicit requirement in the test specifications
-- **Benefits**: Faster navigation, better UX for podcast browsing, simpler deployment
 
 ### State Management
 

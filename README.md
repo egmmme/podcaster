@@ -37,31 +37,17 @@ Deploy the `/dist` folder to any static hosting service (Netlify, Vercel, GitHub
 - **Testing**: Jest + React Testing Library
 - **Security**: DOMPurify
 
-## 🎯 Key Features
+## 🎯 Key Decisions & Features
 
-### Podcast Discovery
+- **[Architecture](./docs/architecture.md)** - Tech stack, project structure, design decisions, and patterns
+- **[UX-UI Features](./docs/uxui-features.md)** - Core UI/UX details
+- **[Features](./docs/features.md)** - Core functionality and data flow
+- **[Testing](./docs/testing.md)** - Testing strategy, coverage goals, and best practices
+- **[Performance](./docs/performance.md)** - Optimization techniques, caching, and bundle analysis
+- **[Security](./docs/security.md)** - XSS prevention, HTML sanitization, and security best practices
+- **[Available Scripts](./docs/scripts.md)** - Development and CI commands
 
-- Browse top 100 podcasts from iTunes
-- Real-time search and filtering
-- Responsive grid layout
 
-### Episode Playback
-
-- Native HTML5 audio player
-- Secure episode description rendering
-- Persistent podcast sidebar
-
-### Performance
-
-- Route-based code splitting
-- 24-hour client-side caching
-- Optimized bundle sizes (~215 KB total)
-
-### Security
-
-- DOMPurify HTML sanitization
-- Whitelisted tags and attributes
-- Hardened external links
 
 ## 🧪 Quality Assurance
 
@@ -69,21 +55,6 @@ Deploy the `/dist` folder to any static hosting service (Netlify, Vercel, GitHub
 - **Linting**: ESLint + Stylelint with strict rules
 - **Testing**: 70%+ coverage across all metrics
 - **CI-Ready**: `npm run validate` for automated checks
-
-## 📱 Browser Support
-
-- **Primary**: Chrome (latest)
-- **Secondary**: Modern evergreen browsers (Firefox, Safari, Edge)
-
-## Documentation
-
-- **[Architecture](./docs/architecture.md)** - Tech stack, project structure, design decisions, and patterns
-- **[Features](./docs/features.md)** - Core functionality, UI/UX details, and data flow
-- **[Testing](./docs/testing.md)** - Testing strategy, coverage goals, and best practices
-- **[Performance](./docs/performance.md)** - Optimization techniques, caching, and bundle analysis
-- **[Security](./docs/security.md)** - XSS prevention, HTML sanitization, and security best practices
-- **[Responsive Design](./docs/responsive-design-guide.md)** - Breakpoints, CSS variables, and responsive patterns
-- **[Available Scripts](./docs/scripts.md)** - Development and CI commands
 
 ## 📄 License
 
