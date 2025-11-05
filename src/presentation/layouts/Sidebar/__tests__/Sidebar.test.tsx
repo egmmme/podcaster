@@ -11,7 +11,9 @@ const mockPodcast = {
   summary: 'Test podcast summary for testing purposes',
 };
 
-const renderWithRouter = (component: React.ReactElement): ReturnType<typeof render> => {
+const renderWithRouter = (
+  component: React.ReactElement
+): ReturnType<typeof render> => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
 };
 

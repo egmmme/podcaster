@@ -38,7 +38,7 @@ export class PodcastApiService {
     podcastId: string
   ): Promise<{ podcast: PodcastDetail; episodes: Episode[] }> {
     const url = `${API_CONSTANTS.PODCAST_LOOKUP_URL}?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
-    
+
     const data = await HttpClient.getWithCors<iTunesPodcastLookupResponse>(url);
 
     const podcastResult = data.results.find(
