@@ -1,0 +1,119 @@
+.episode-list {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border-primary);
+}
+
+.episode-list__header {
+    margin-bottom: var(--space-5);
+}
+
+.episode-list__title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.episode-list__table-container {
+    overflow-x: auto;
+}
+
+.episode-list__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.episode-list__thead {
+    border-bottom: 2px solid var(--color-border-primary);
+}
+
+.episode-list__th {
+    padding: var(--space-4) var(--space-2);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+}
+
+.episode-list__tbody {
+    border-bottom: 1px solid var(--color-border-primary);
+}
+
+.episode-list__row {
+    border-bottom: 1px solid var(--color-border-primary);
+    transition: background-color var(--transition-duration-fast);
+}
+
+.episode-list__row:hover {
+    background-color: var(--color-bg-secondary);
+}
+
+.episode-list__row:last-child {
+    border-bottom: none;
+}
+
+.episode-list__td {
+    padding: var(--space-4) var(--space-2);
+    vertical-align: top;
+}
+
+.episode-list__td--title {
+    width: 60%;
+}
+
+.episode-list__td--date {
+    width: 20%;
+    color: var(--color-text-secondary);
+}
+
+.episode-list__td--duration {
+    width: 20%;
+    color: var(--color-text-secondary);
+    text-align: center;
+}
+
+.episode-list__link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-duration-fast);
+}
+
+.episode-list__link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+.episode-list__empty {
+    text-align: center;
+    color: var(--color-text-secondary);
+    padding: var(--space-7);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .episode-list {
+        padding: var(--space-4);
+    }
+
+    .episode-list__th,
+    .episode-list__td {
+        padding: var(--space-2) var(--space-1);
+        font-size: var(--font-size-sm);
+    }
+
+    .episode-list__td--title {
+        width: 50%;
+    }
+
+    .episode-list__td--date {
+        width: 25%;
+    }
+
+    .episode-list__td--duration {
+        width: 25%;
+    }
+}
