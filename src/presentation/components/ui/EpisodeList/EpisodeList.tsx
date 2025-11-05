@@ -9,7 +9,7 @@ interface EpisodeListProps {
   className?: string;
 }
 
-export const EpisodeList: React.FC<EpisodeListProps> = ({
+const EpisodeList: React.FC<EpisodeListProps> = ({
   episodes,
   podcastId,
   className = '',
@@ -62,3 +62,5 @@ export const EpisodeList: React.FC<EpisodeListProps> = ({
     </div>
   );
 };
+
+export default EpisodeList;

@@ -8,7 +8,7 @@ interface SidebarProps {
   className?: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({
+const Sidebar: React.FC<SidebarProps> = ({
   podcast,
   className = '',
 }) => {
@@ -46,3 +46,5 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </aside>
   );
 };
+
+export default Sidebar;
