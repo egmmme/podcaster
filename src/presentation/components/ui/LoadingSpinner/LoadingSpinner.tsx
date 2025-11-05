@@ -19,7 +19,12 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`loading-spinner loading-spinner--${size} ${className}`}>
+    <div
+      className={`loading-spinner loading-spinner--${size} ${className}`}
+      role="status"
+      aria-live="polite"
+      aria-label="Loading"
+    >
       <div className="loading-spinner__spinner"></div>
     </div>
   );

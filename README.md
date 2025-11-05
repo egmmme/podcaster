@@ -123,8 +123,4 @@ Contributions are welcome! Please ensure:
 1. All tests pass (`npm run validate`)
 2. Coverage remains above 70% (`npm run test:threshold`)
 3. Code follows existing patterns and style
-4. JSDoc comments for new components (KISS style, no `@example`)
-
----
-
-**Built with ❤️ using React and TypeScript**
+4. JSDoc comments for new components (KISS style)
