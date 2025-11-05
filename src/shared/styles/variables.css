@@ -220,24 +220,6 @@
    @media (max-width: 1024px) { ... }  // Medium devices (tablets)
    @media (max-width: 1280px) { ... }  // Large devices
    @media (max-width: 1536px) { ... }  // Extra large devices
-   
-   Desktop-First Alternative (min-width) - Use if switching approach:
-   @media (min-width: 640px)  { ... }  // sm and up
-   @media (min-width: 768px)  { ... }  // md and up
-   @media (min-width: 1024px) { ... }  // lg and up
-   @media (min-width: 1280px) { ... }  // xl and up
-   @media (min-width: 1536px) { ... }  // 2xl and up
-*/
-
-/* ===== DARK THEME (Para futura implementación) ===== */
-/* Disabled for now - uncomment when dark theme is fully implemented
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg-primary: var(--color-secondary-900);
-    --color-text-primary: var(--color-white);
-    --color-border-primary: var(--color-secondary-700);
-  }
-}
 */
 
 /* ===== PRINT STYLES ===== */
