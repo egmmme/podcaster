@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from '../app/contexts/AppContext';
 import { AppLayout } from './layouts/AppLayout';
-import { LoadingSpinner } from './components/ui/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from './components/ui/LoadingSpinner/LoadingSpinner';
 import '../shared/styles/variables.css';
 
 // Route-based code splitting

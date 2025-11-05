@@ -10,11 +10,25 @@ export class CacheService {
     StorageService.set(STORAGE_KEYS.PODCASTS, podcasts);
   }
 
-  static getEpisodes(podcastId: string): unknown {
-    const allEpisodes = StorageService.get<Record<string, unknown>>(
-      STORAGE_KEYS.EPISODES
-    );
-    return allEpisodes?.data[podcastId] || null;
+  static getEpisodes(
+    podcastId: string
+  ): { data: unknown; lastUpdated: number } | null {
+    const allEpisodes =
+      StorageService.get<
+        Record<string, { episodes: unknown; lastUpdated: number }>
+      >(STORAGE_KEYS.EPISODES) || null;
+
+    const entry = allEpisodes?.data[podcastId] as
+      | { episodes: unknown; lastUpdated: number }
+      | undefined;
+
+    if (!entry) return null;
+
+    // Normalize per-podcast cache entry to a Cacheable-like shape
+    return {
+      data: entry.episodes,
+      lastUpdated: entry.lastUpdated,
+    };
   }
 
   static setEpisodes(podcastId: string, episodes: unknown): void {
@@ -35,9 +49,6 @@ export class CacheService {
 
   static shouldFetchEpisodes(podcastId: string): boolean {
     const cached = this.getEpisodes(podcastId);
-    return StorageService.isExpired(
-      cached as { lastUpdated: number; data: unknown } | null,
-      API_CONSTANTS.CACHE_DURATION
-    );
+    return StorageService.isExpired(cached, API_CONSTANTS.CACHE_DURATION);
   }
 }

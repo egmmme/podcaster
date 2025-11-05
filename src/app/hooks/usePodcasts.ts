@@ -80,7 +80,7 @@ export const usePodcastDetail = (
         if (!forceRefresh && !CacheService.shouldFetchEpisodes(podcastId)) {
           const cached = CacheService.getEpisodes(podcastId);
           if (cached) {
-            const cachedData = cached as {
+            const cachedData = cached.data as {
               podcast: PodcastDetail;
               episodes: Episode[];
             };
