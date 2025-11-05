@@ -1,6 +1,5 @@
 import React from 'react';
-import DOMPurify from 'dompurify';
-import './SafeHTMLRenderer.css';
+import DOMPurify from 'dompurify'; 
 
 interface SafeHTMLRendererProps {
   html: string;
@@ -12,7 +11,16 @@ export const SafeHTMLRenderer: React.FC<SafeHTMLRendererProps> = ({
   className = '',
 }) => {
   const sanitizeHTML = (dirtyHTML: string): string => {
-    return DOMPurify.sanitize(dirtyHTML, {
+    // Configure DOMPurify with security hooks
+    DOMPurify.addHook('afterSanitizeAttributes', (node) => {
+      // Set all links to open in new tab with security attributes
+      if (node.tagName === 'A') {
+        node.setAttribute('target', '_blank');
+        node.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+
+    const cleaned = DOMPurify.sanitize(dirtyHTML, {
       // Tags permitidos (solo formato básico)
       ALLOWED_TAGS: [
         'p',
@@ -30,14 +38,12 @@ export const SafeHTMLRenderer: React.FC<SafeHTMLRendererProps> = ({
       ALLOWED_ATTR: ['href', 'target', 'rel'],
       // URLs permitidas
       ALLOWED_URI_REGEXP: /^(https?|mailto):/i,
-      // Forzar atributos de seguridad en links
-      FORCE_ATTR: {
-        a: {
-          rel: 'noopener noreferrer',
-          target: '_blank',
-        },
-      },
     });
+
+    // Remove the hook after sanitization to avoid conflicts
+    DOMPurify.removeAllHooks();
+
+    return cleaned;
   };
 
   const cleanHTML = sanitizeHTML(html || '');
@@ -48,7 +54,7 @@ export const SafeHTMLRenderer: React.FC<SafeHTMLRendererProps> = ({
 
   return (
     <div
-      className={`safe-html-renderer ${className}`}
+      className={`${className}`}
       dangerouslySetInnerHTML={{ __html: cleanHTML }}
     />
   );

@@ -22,6 +22,21 @@ jest.mock('../../../components/ui/AudioPlayer/AudioPlayer', () => ({
   ),
 }));
 
+jest.mock('../../../components/ui/SafeHTMLRenderer/SafeHTMLRenderer', () => ({
+  __esModule: true,
+  default: ({
+    html,
+    className,
+  }: {
+    html: string;
+    className?: string;
+  }): JSX.Element => (
+    <div data-testid="episode-detail-page__description" className={className}>
+      Sanitized: {html}
+    </div>
+  ),
+}));
+
 const mockPodcast = {
   id: '1',
   name: 'Test Podcast',
@@ -118,7 +133,7 @@ describe('EpisodeDetailPage', () => {
     expect(screen.getByText('Episode not found')).toBeInTheDocument();
   });
 
-  it('should render episode details when data is loaded', async () => {
+  it('should render episode details with SafeHTMLRenderer', async () => {
     mockUsePodcastDetail.mockReturnValue({
       podcast: mockPodcast,
       episodes: mockEpisodes,
@@ -132,18 +147,20 @@ describe('EpisodeDetailPage', () => {
     await waitFor(() => {
       expect(screen.getByTestId('sidebar')).toBeInTheDocument();
       expect(screen.getByTestId('audio-player')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('episode-detail-page__description')
+      ).toBeInTheDocument();
     });
 
     expect(screen.getByText('Test Episode 1')).toBeInTheDocument();
-    // Check that HTML description is rendered (it contains bold HTML text)
-    const descriptionDiv = document.querySelector(
-      '.episode-detail-page__description'
-    );
-    expect(descriptionDiv).toBeInTheDocument();
-    expect(descriptionDiv?.innerHTML).toContain('<strong>HTML</strong>');
+    expect(
+      screen.getByText(
+        'Sanitized: <p>Test <strong>HTML</strong> description</p>'
+      )
+    ).toBeInTheDocument();
   });
 
-  it('should render without description when not provided', async () => {
+  it('should not render SafeHTMLRenderer when description is undefined', async () => {
     const episodeWithoutDescription = {
       ...mockEpisodes[0],
       description: undefined,
@@ -163,7 +180,8 @@ describe('EpisodeDetailPage', () => {
       expect(screen.getByText('Test Episode 1')).toBeInTheDocument();
     });
 
-    // Should not crash when description is undefined
-    expect(screen.getByTestId('audio-player')).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('episode-detail-page__description')
+    ).not.toBeInTheDocument();
   });
 });
