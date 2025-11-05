@@ -6,8 +6,6 @@
 - Tablet (768–1023px): compact sidebar
 - Mobile (<768px): single column, touch-friendly
 
-Details: see [Responsive Design Guide](./responsive-design-guide.md).
-
 ### Design System
 
 - CSS variables as design tokens (`src/shared/styles/variables.css`)
