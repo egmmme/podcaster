@@ -5,25 +5,28 @@
 }
 
 .loading-spinner__spinner {
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-border-primary);
   border-top: 2px solid var(--color-primary);
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   animation: spin 1s linear infinite;
 }
 
 .loading-spinner--small .loading-spinner__spinner {
   width: 16px;
   height: 16px;
+  border-width: 2px;
 }
 
 .loading-spinner--medium .loading-spinner__spinner {
   width: 24px;
   height: 24px;
+  border-width: 2px;
 }
 
 .loading-spinner--large .loading-spinner__spinner {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
 }
 
 @keyframes spin {
