@@ -1,96 +1,41 @@
 # Architecture
 
-## Tech Stack
+Clean layers with clear boundaries and path aliases for maintainability.
 
-- **Frontend**: React 18, TypeScript 4.9
-- **Routing**: React Router DOM v6
-- **State Management**: Context API + useReducer
-- **Build Tool**: Webpack 5 (custom configuration)
-- **Styling**: CSS3 with CSS Variables
-- **Testing**: Jest 29 + React Testing Library
-- **Security**: DOMPurify for HTML sanitization
-
-## Project Structure
+## Structure
 
 ```
 src/
-├── app/                    # Application layer
-│   ├── contexts/          # React Context providers
-│   └── hooks/             # Custom React hooks
-├── domain/                # Business logic layer
-│   ├── entities/          # Core data models
-│   └── types/             # TypeScript type definitions
-├── presentation/          # UI layer
-│   ├── components/        # Reusable UI components
-│   ├── layouts/           # Page layouts
-│   └── pages/             # Route-level pages
-├── services/              # External services
-│   ├── api/              # HTTP client and API calls
-│   └── cache/            # Client-side caching
-└── shared/               # Shared utilities
-    ├── constants/        # App-wide constants
-    └── styles/           # Global CSS variables
+├─ app/           # contexts, hooks (state orchestration)
+├─ domain/        # entities, types (pure models)
+├─ presentation/  # components, layouts, pages (UI)
+├─ services/      # api, cache (I/O)
+└─ shared/        # constants, styles
 ```
 
-## Key Design Decisions
+## Layers (at a glance)
 
-### SPA over SSR
+- Domain → Services → Application → Presentation
+- Application: Context + reducers; hooks for async/data logic.
+- Presentation: UI-only components, typed props, small and composable.
 
-- **Choice**: Client-side Single Page Application
-- **Reason**: Explicit requirement in the test specifications
-- **Benefits**: Faster navigation, better UX for podcast browsing, simpler deployment
+## State
 
-### State Management
+- Context + useReducer (no Redux/Zustand).
+- Contexts: App (loading), Podcast (data + filter), UI (view state).
 
-- **Choice**: React Context API + useReducer
-- **Reason**: Project requirements prohibited Redux/Zustand
-- **Benefits**: Built-in React solution, minimal bundle size, type-safe with TypeScript
-- **Implementation**: Separate contexts for different concerns (App, Podcast, UI)
+## Build & Aliases
 
-### Custom Webpack Configuration
+- Webpack 5 with code splitting and analysis; TS path aliases:
 
-- **Choice**: Custom Webpack 5 setup over Create React App
-- **Benefits**: Full control over build process, optimized bundle splitting, custom path aliases
-- **Features**: Production optimization, development hot reloading, bundle analysis
-
-### Path Aliases
-
-TypeScript path aliases for cleaner imports:
-
-```typescript
+```ts
 import { usePodcasts } from '@app/hooks/usePodcasts';
 import { Podcast } from '@domain/entities';
 import { PodcastApiService } from '@services/api/podcastApi';
 ```
 
-Configured in both `tsconfig.json` and `webpack.config.js`.
-
-## Design Patterns
-
-### Layered Architecture
-
-The application follows a clean architecture approach with clear separation of concerns:
-
-1. **Domain Layer**: Pure business logic, no framework dependencies
-2. **Services Layer**: API calls, caching, external integrations
-3. **Application Layer**: State management, business logic orchestration
-4. **Presentation Layer**: React components, UI logic only
-
-### Component Design
-
-- **Functional Components**: All components use React hooks
-- **Props Interface**: Every component has a typed props interface with JSDoc
-- **Composition**: Prefer composition over inheritance
-- **Single Responsibility**: Each component has one clear purpose
-
-### State Management Strategy
-
-- **AppContext**: Global app state (loading states)
-- **PodcastContext**: Podcast data and filtering
-- **UIContext**: UI-specific state (modals, notifications)
+Configured in `tsconfig.json` and `webpack.config.js`.
 
 ## Browser Support
 
-- **Primary**: Chrome (latest) - as specified in requirements
-- **Secondary**: Modern evergreen browsers (Firefox, Safari, Edge)
-- **Minimum**: Browsers supporting ES6, CSS Grid, and Flexbox
+Modern evergreen browsers (Chrome, Firefox, Safari, Edge).
