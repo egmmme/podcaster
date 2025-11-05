@@ -1,0 +1,89 @@
+.episode-detail-page__loading,
+.episode-detail-page__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+    text-align: center;
+    gap: var(--space-4);
+}
+
+.episode-detail-page__error {
+    color: var(--color-error);
+}
+
+.episode-detail-page__layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-6);
+    align-items: start;
+    max-width: var(--max-width-7xl);
+    margin: 0 auto;
+}
+
+.episode-detail-page__sidebar {
+    position: sticky;
+    top: var(--space-6);
+}
+
+.episode-detail-page__content {
+    min-width: 0;
+}
+
+.episode-detail-page__episode-title {
+    margin: 0 0 var(--space-5);
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+}
+
+.episode-detail-page__description {
+    margin-bottom: var(--space-7);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-relaxed);
+}
+
+.episode-detail-page__description :first-child {
+    margin-top: 0;
+}
+
+.episode-detail-page__description :last-child {
+    margin-bottom: 0;
+}
+
+.episode-detail-page__player {
+    margin-top: var(--space-7);
+}
+
+@media (max-width: 1024px) {
+    .episode-detail-page__layout {
+        grid-template-columns: 250px 1fr;
+        gap: var(--space-5);
+    }
+}
+
+@media (max-width: 768px) {
+    .episode-detail-page__layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .episode-detail-page__sidebar {
+        position: static;
+    }
+
+    .episode-detail-page__episode-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-4);
+    }
+
+    .episode-detail-page__description {
+        margin-bottom: var(--space-5);
+    }
+
+    .episode-detail-page__player {
+        margin-top: var(--space-5);
+    }
+}
