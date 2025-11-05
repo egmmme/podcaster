@@ -4,6 +4,7 @@ node_modules/
 # Build output (webpack, scripts, etc.)
 dist/
 build/
+coverage/
 
 # TypeScript build cache
 *.tsbuildinfo
