@@ -1,45 +1,159 @@
-name: Node.js CI
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
+  # Build job: validates the app compiles successfully
   build:
-
+    name: Build
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
     steps:
-    - uses: actions/checkout@v4
-    - name: Show event trigger
-      run: echo "Triggered by ${{ github.event_name }}"
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+  # Test job: runs unit and integration tests across OS and Node versions
   test:
-   runs-on: ${{ matrix.os }}
-   strategy:
-    matrix:
-      os: [ubuntu-latest, windows-latest]
-      node-version: [16.x, 18.x]
-   steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, and test
-      run: |
-        npm install
-        npm test
-      env:
-        CI: true
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18.x, 20.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+        env:
+          CI: true
+
+  # Package job: creates production build artifact
+  package:
+    name: Package
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: dist/
+          retention-days: 30
+
+  # Smoke test: validates the bundled app loads correctly
+  smoke-test:
+    name: Smoke Test
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: dist/
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install serve
+        run: npm install -g serve
+
+      - name: Start static server
+        run: |
+          serve -s dist -l 3000 &
+          echo $! > server.pid
+          sleep 3
+
+      - name: Test homepage loads
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000)
+          if [ "$response" != "200" ]; then
+            echo "❌ Homepage failed to load (HTTP $response)"
+            exit 1
+          fi
+          echo "✅ Homepage loaded successfully (HTTP 200)"
+
+      - name: Test HTML contains root element
+        run: |
+          content=$(curl -s http://localhost:3000)
+          if echo "$content" | grep -q '<div id="root">'; then
+            echo "✅ Root element found in HTML"
+          else
+            echo "❌ Root element not found in HTML"
+            exit 1
+          fi
+
+      - name: Test HTML contains app title
+        run: |
+          content=$(curl -s http://localhost:3000)
+          if echo "$content" | grep -q '<title>Podcaster</title>'; then
+            echo "✅ App title found in HTML"
+          else
+            echo "❌ App title not found in HTML"
+            exit 1
+          fi
+
+      - name: Test JavaScript bundle loads
+        run: |
+          content=$(curl -s http://localhost:3000)
+          if echo "$content" | grep -q 'static/js/'; then
+            echo "✅ JavaScript bundle reference found"
+          else
+            echo "❌ JavaScript bundle reference not found"
+            exit 1
+          fi
+
+      - name: Cleanup
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid) || true
+            rm server.pid
+          fi
