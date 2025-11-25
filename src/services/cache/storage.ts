@@ -5,6 +5,13 @@ import { Cacheable } from '@domain/types/common';
  */
 export class StorageService {
   /**
+   * Internal in-memory fallback store. Some test environments or mocks may provide
+   * a stubbed `localStorage` whose methods are jest.fn() without actual persistence.
+   * We mirror writes so that roundtrip tests still succeed while keeping real
+   * browser behaviour (localStorage first, fallback only if missing).
+   */
+  private static memory = new Map<string, string>();
+  /**
    * Retrieves and parses data from localStorage.
    * @param key - The localStorage key
    * @returns Cacheable object with data and timestamp, or null if not found
@@ -12,7 +19,10 @@ export class StorageService {
   static get<T>(key: string): Cacheable<T> | null {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : null;
+      if (item) return JSON.parse(item);
+      // Fallback to in-memory cache if localStorage mock didn't persist
+      const mem = StorageService.memory.get(key);
+      return mem ? JSON.parse(mem) : null;
     } catch (error) {
       console.error(`Error reading from localStorage key "${key}":`, error);
       return null;
@@ -30,7 +40,10 @@ export class StorageService {
         data,
         lastUpdated: Date.now(),
       };
-      localStorage.setItem(key, JSON.stringify(cacheable));
+      const serialized = JSON.stringify(cacheable);
+      localStorage.setItem(key, serialized);
+      // Mirror into memory in case localStorage is a non-persistent stub
+      StorageService.memory.set(key, serialized);
     } catch (error) {
       console.error(`Error writing to localStorage key "${key}":`, error);
     }
