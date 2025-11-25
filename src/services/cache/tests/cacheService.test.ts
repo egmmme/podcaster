@@ -1,4 +1,5 @@
 import { CacheService } from '../cacheService';
+import { StorageService } from '../storage';
 
 const localStorageMock = {
   getItem: jest.fn(),
@@ -12,6 +13,7 @@ describe('CacheService', () => {
   beforeEach(() => {
     localStorageMock.getItem.mockClear();
     localStorageMock.setItem.mockClear();
+    StorageService.clearMemory();
   });
 
   describe('getPodcasts', () => {

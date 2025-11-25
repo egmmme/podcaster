@@ -62,4 +62,11 @@ export class StorageService {
     if (!cacheItem) return true;
     return Date.now() - cacheItem.lastUpdated > cacheDuration;
   }
+
+  /**
+   * Clears the in-memory cache. Used primarily for testing.
+   */
+  static clearMemory(): void {
+    StorageService.memory.clear();
+  }
 }
