@@ -1,3 +1,4 @@
+[![Board Status](https://dev.azure.com/egarciamadruga/5b3ec2db-9d6a-47db-a33d-b58445673745/3aa4c3bb-ce0f-457f-9a05-381bc238858e/_apis/work/boardbadge/30cb0594-31e1-46a3-81a4-eb424408e25f)](https://dev.azure.com/egarciamadruga/5b3ec2db-9d6a-47db-a33d-b58445673745/_boards/board/t/3aa4c3bb-ce0f-457f-9a05-381bc238858e/Microsoft.RequirementCategory)
 # Podcaster
 
 A modern React + TypeScript app for browsing iTunes podcasts with secure HTML rendering and 24h client-side caching.
