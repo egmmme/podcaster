@@ -34,5 +34,5 @@ window.PodcasterConfig = {
     /**
      * Application version (injected during build if needed)
      */
-    version: '1.2.0',
+    version: '1.2.1',
 };

@@ -49,7 +49,7 @@ export const DEFAULT_CONFIG: PodcasterConfig = {
   apiBaseUrl: '',
   apiMode: 'itunes',
   debug: false,
-  version: '1.2.0',
+  version: '1.2.1',
 };
 
 /**
