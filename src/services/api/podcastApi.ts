@@ -4,18 +4,28 @@ import {
   iTunesPodcastLookupResponse,
 } from '@domain/types/api';
 import { Podcast, PodcastDetail, Episode } from '@domain/entities';
-import { API_CONSTANTS } from '@shared/constants/api';
+import { API_CONSTANTS, buildApiUrl } from '@shared/constants/api';
+import { getConfig } from '@shared/config/runtime';
 
 /**
- * Service for fetching podcast data from iTunes API via CORS proxy.
+ * Service for fetching podcast data from iTunes API or backend API.
  */
 export class PodcastApiService {
   /**
-   * Fetches the top 100 podcasts from iTunes.
+   * Fetches the top 100 podcasts from iTunes or backend API.
    * @returns Promise with array of podcasts
    */
   static async getTopPodcasts(): Promise<Podcast[]> {
-    // CORREGIDO: Usar la URL directa sin duplicar el proxy
+    const config = getConfig();
+
+    if (config.apiMode === 'backend') {
+      // Use backend API
+      const url = buildApiUrl('/api/podcasts');
+      const data = await HttpClient.get<Podcast[]>(url);
+      return data;
+    }
+
+    // Use iTunes API via CORS proxy
     const data = await HttpClient.getWithCors<iTunesPodcastResponse>(
       API_CONSTANTS.TOP_PODCASTS_URL
     );
@@ -37,6 +47,19 @@ export class PodcastApiService {
   static async getPodcastDetail(
     podcastId: string
   ): Promise<{ podcast: PodcastDetail; episodes: Episode[] }> {
+    const config = getConfig();
+
+    if (config.apiMode === 'backend') {
+      // Use backend API
+      const url = buildApiUrl(`/api/podcasts/${podcastId}`);
+      const data = await HttpClient.get<{
+        podcast: PodcastDetail;
+        episodes: Episode[];
+      }>(url);
+      return data;
+    }
+
+    // Use iTunes API via CORS proxy
     const url = `${API_CONSTANTS.PODCAST_LOOKUP_URL}?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
 
     const data = await HttpClient.getWithCors<iTunesPodcastLookupResponse>(url);

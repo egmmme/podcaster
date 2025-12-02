@@ -20,6 +20,13 @@ window.PodcasterConfig = {
     apiBaseUrl: '',
 
     /**
+     * API mode: 'backend' or 'itunes'
+     * - 'backend': Use backend API endpoints (/api/podcasts, /api/podcasts/:id)
+     * - 'itunes': Use iTunes API directly via CORS proxy (default)
+     */
+    apiMode: 'itunes',
+
+    /**
      * Enable debug logging in the browser console.
      */
     debug: false,

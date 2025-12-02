@@ -1,4 +1,9 @@
 /**
+ * API mode type
+ */
+export type ApiMode = 'backend' | 'itunes';
+
+/**
  * Runtime configuration interface for Podcaster application.
  * Configuration is loaded from /config.js and available at window.PodcasterConfig
  */
@@ -9,6 +14,13 @@ export interface PodcasterConfig {
    * - Full URL for cross-origin API (without trailing slash)
    */
   apiBaseUrl: string;
+
+  /**
+   * API mode: 'backend' or 'itunes'
+   * - 'backend': Use backend API endpoints
+   * - 'itunes': Use iTunes API directly via CORS proxy
+   */
+  apiMode: ApiMode;
 
   /**
    * Enable debug logging in the browser console
@@ -35,6 +47,7 @@ declare global {
  */
 export const DEFAULT_CONFIG: PodcasterConfig = {
   apiBaseUrl: '',
+  apiMode: 'itunes',
   debug: false,
   version: '1.2.0',
 };
