@@ -36,7 +36,7 @@ declare global {
 export const DEFAULT_CONFIG: PodcasterConfig = {
   apiBaseUrl: '',
   debug: false,
-  version: '1.1.2',
+  version: '1.2.0',
 };
 
 /**
