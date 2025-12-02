@@ -2,6 +2,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CompressionPlugin from 'compression-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -67,6 +68,18 @@ export default (env, argv) => {
                     minifyCSS: true,
                     minifyURLs: true,
                 } : false,
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'public/config.js',
+                        to: 'config.js',
+                    },
+                    {
+                        from: 'public/favicon.svg',
+                        to: 'favicon.svg',
+                    },
+                ],
             }),
             isAnalyze && new BundleAnalyzerPlugin({
                 analyzerMode: 'server',
