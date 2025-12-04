@@ -1,3 +1,4 @@
+[![CI/CD Pipeline](https://github.com/egmmme/podcaster/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/egmmme/podcaster/actions/workflows/build-and-test.yml)
 # Podcaster
 
 A modern React + TypeScript app for browsing iTunes podcasts with secure HTML rendering and 24h client-side caching.
