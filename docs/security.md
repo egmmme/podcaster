@@ -18,7 +18,7 @@ Quick example:
 
 - Read-only iTunes API over HTTPS; no authentication; no PII stored.
 - localStorage is used only for caching public data (24h TTL).
-- CORS proxy for feed parsing: https://corsproxy.io/? (see `API_CONSTANTS.CORS_PROXY`).
+- Podcast data is fetched directly from Apple's CORS-enabled iTunes endpoints; no third-party proxy is used.
 
 ## Dependencies
 

@@ -22,7 +22,7 @@ const EpisodeDetailPage = lazy(
 
 - localStorage with a 24h TTL for top podcasts and per-podcast episodes.
 - Smart refetching only when cache is missing or expired.
-- CORS proxy: `https://corsproxy.io/?` (configurable via `API_CONSTANTS.CORS_PROXY`).
+- Podcast data is fetched directly from Apple's CORS-enabled iTunes endpoints.
 
 ## Asset Optimization
 

@@ -1,19 +1,20 @@
 import { PodcastApiService } from '../podcastApi';
 import { HttpClient } from '../httpClient';
+import { API_CONSTANTS } from '@shared/constants/api';
 
 jest.mock('../httpClient', () => ({
   HttpClient: {
-    getWithCors: jest.fn(),
+    get: jest.fn(),
   },
 }));
 
 describe('PodcastApiService', () => {
   beforeEach(() => {
-    (HttpClient.getWithCors as jest.Mock).mockReset();
+    (HttpClient.get as jest.Mock).mockReset();
   });
 
   test('getTopPodcasts maps iTunes response to domain Podcast[]', async () => {
-    (HttpClient.getWithCors as jest.Mock).mockResolvedValue({
+    (HttpClient.get as jest.Mock).mockResolvedValue({
       feed: {
         entry: [
           {
@@ -32,6 +33,9 @@ describe('PodcastApiService', () => {
     });
 
     const res = await PodcastApiService.getTopPodcasts();
+    expect(HttpClient.get).toHaveBeenCalledWith(
+      API_CONSTANTS.TOP_PODCASTS_URL
+    );
     expect(res).toEqual([
       {
         id: '1',
@@ -44,7 +48,7 @@ describe('PodcastApiService', () => {
   });
 
   test('getPodcastDetail maps podcast and episodes; formats duration', async () => {
-    (HttpClient.getWithCors as jest.Mock).mockResolvedValue({
+    (HttpClient.get as jest.Mock).mockResolvedValue({
       results: [
         {
           kind: 'podcast',
@@ -76,6 +80,9 @@ describe('PodcastApiService', () => {
     });
 
     const { podcast, episodes } = await PodcastApiService.getPodcastDetail('1');
+    expect(HttpClient.get).toHaveBeenCalledWith(
+      `${API_CONSTANTS.PODCAST_LOOKUP_URL}?id=1&media=podcast&entity=podcastEpisode&limit=20`
+    );
     expect(podcast).toMatchObject({
       id: '1',
       name: 'Show 1',
@@ -99,7 +106,7 @@ describe('PodcastApiService', () => {
   });
 
   test('getPodcastDetail throws when podcast not found', async () => {
-    (HttpClient.getWithCors as jest.Mock).mockResolvedValue({ results: [] });
+    (HttpClient.get as jest.Mock).mockResolvedValue({ results: [] });
     await expect(PodcastApiService.getPodcastDetail('1')).rejects.toThrow(
       /not found/i
     );

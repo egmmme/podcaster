@@ -1,7 +1,5 @@
-import { API_CONSTANTS } from '@shared/constants/api';
-
 /**
- * HTTP client wrapper for making API requests with optional CORS proxy support.
+ * HTTP client wrapper for making API requests.
  */
 export class HttpClient {
   /**
@@ -20,13 +18,4 @@ export class HttpClient {
     return response.json();
   }
 
-  /**
-   * Performs a GET request through a CORS proxy to bypass restrictions.
-   * @param url - The target URL to fetch from (will be proxied)
-   * @returns Promise resolving to the parsed JSON response
-   */
-  static async getWithCors<T>(url: string): Promise<T> {
-    const corsUrl = `${API_CONSTANTS.CORS_PROXY}${encodeURIComponent(url)}`;
-    return this.get<T>(corsUrl);
-  }
 }

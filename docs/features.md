@@ -13,5 +13,5 @@
 ## Data flow (at a glance)
 
 - List: `usePodcasts` → cache check → fetch if stale → render filtered list
-- Detail: `usePodcastDetail(id)` → fetch episodes via CORS proxy → cache → render
+- Detail: `usePodcastDetail(id)` → fetch episodes from iTunes → cache → render
 - Playback: navigate to episode → sanitize description → play via audio element

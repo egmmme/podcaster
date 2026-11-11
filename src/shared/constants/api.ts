@@ -23,8 +23,6 @@ export const buildApiUrl = (path: string): string => {
 };
 
 export const API_CONSTANTS = {
-  // CORS_PROXY: 'https://api.allorigins.win/raw?url=',
-  CORS_PROXY: 'https://corsproxy.io/?',
   TOP_PODCASTS_URL:
     'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json',
   PODCAST_LOOKUP_URL: 'https://itunes.apple.com/lookup',

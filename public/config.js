@@ -22,7 +22,7 @@ window.PodcasterConfig = {
     /**
      * API mode: 'backend' or 'itunes'
      * - 'backend': Use backend API endpoints (/api/podcasts, /api/podcasts/:id)
-     * - 'itunes': Use iTunes API directly via CORS proxy (default)
+     * - 'itunes': Use iTunes API directly (default)
      */
     apiMode: 'itunes',
 

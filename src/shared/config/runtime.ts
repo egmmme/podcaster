@@ -18,7 +18,7 @@ export interface PodcasterConfig {
   /**
    * API mode: 'backend' or 'itunes'
    * - 'backend': Use backend API endpoints
-   * - 'itunes': Use iTunes API directly via CORS proxy
+   * - 'itunes': Use iTunes API directly
    */
   apiMode: ApiMode;
 

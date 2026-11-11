@@ -8,7 +8,7 @@
 // ============================================================================
 window.PodcasterConfig = {
     apiBaseUrl: '',
-    apiMode: 'itunes',  // Use iTunes API directly via CORS proxy
+    apiMode: 'itunes',  // Use iTunes API directly
     debug: true,
     version: '1.2.0',
 };

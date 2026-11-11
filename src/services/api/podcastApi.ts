@@ -25,8 +25,8 @@ export class PodcastApiService {
       return data;
     }
 
-    // Use iTunes API via CORS proxy
-    const data = await HttpClient.getWithCors<iTunesPodcastResponse>(
+    // iTunes endpoints allow cross-origin requests, so no proxy is needed.
+    const data = await HttpClient.get<iTunesPodcastResponse>(
       API_CONSTANTS.TOP_PODCASTS_URL
     );
 
@@ -59,10 +59,10 @@ export class PodcastApiService {
       return data;
     }
 
-    // Use iTunes API via CORS proxy
+    // iTunes endpoints allow cross-origin requests, so no proxy is needed.
     const url = `${API_CONSTANTS.PODCAST_LOOKUP_URL}?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
 
-    const data = await HttpClient.getWithCors<iTunesPodcastLookupResponse>(url);
+    const data = await HttpClient.get<iTunesPodcastLookupResponse>(url);
 
     const podcastResult = data.results.find(
       (result) => result.kind === 'podcast'
